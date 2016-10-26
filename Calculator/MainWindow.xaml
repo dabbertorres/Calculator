@@ -1,0 +1,68 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="320" Width="320">
+	<Window.Resources>
+		<local:FontSizeAdjuster x:Key="FontSizeAdjuster"/>
+
+		<Style TargetType="Button">
+			<Setter Property="Margin" Value="3"/>
+		</Style>
+	</Window.Resources>
+
+	<Grid Margin="3" FocusManager.FocusedElement="{Binding ElementName=expression}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+        <TextBox x:Name="expression" MaxLines="1" TextWrapping="Wrap" Margin="3" VerticalContentAlignment="Center" KeyUp="Expression_KeyUp"
+				 FontSize="{Binding ActualHeight, ConverterParameter=0.7, Converter={StaticResource FontSizeAdjuster}, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+				 Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" PreviewTextInput="ExpressionPreviewInput" DataObject.Pasting="ExpressionPaste"/>
+
+        <!--number grid-->
+		<Button Content="0" Grid.Row="6" Grid.Column="0" Click="Button0_Click" Grid.ColumnSpan="2"/>
+		<Button Content="1" Grid.Row="5" Grid.Column="0" Click="Button1_Click"/>
+		<Button Content="2" Grid.Row="5" Grid.Column="1" Click="Button2_Click"/>
+		<Button Content="3" Grid.Row="5" Grid.Column="2" Click="Button3_Click"/>
+		<Button Content="4" Grid.Row="4" Grid.Column="0" Click="Button4_Click"/>
+		<Button Content="5" Grid.Row="4" Grid.Column="1" Click="Button5_Click"/>
+		<Button Content="6" Grid.Row="4" Grid.Column="2" Click="Button6_Click"/>
+		<Button Content="7" Grid.Row="3" Grid.Column="0" Click="Button7_Click"/>
+		<Button Content="8" Grid.Row="3" Grid.Column="1" Click="Button8_Click"/>
+		<Button Content="9" Grid.Row="3" Grid.Column="2" Click="Button9_Click"/>
+
+		<!--operations-->
+		<Button Content="+" Grid.Row="4" Grid.Column="3" Click="ButtonAdd_Click"/>
+		<Button Content="-" Grid.Row="3" Grid.Column="3" Click="ButtonSub_Click"/>
+		<Button Content="*" Grid.Row="2" Grid.Column="3" Click="ButtonMult_Click"/>
+		<Button Content="/" Grid.Row="1" Grid.Column="3" Click="ButtonDiv_Click"/>
+		<Button Content="%" Grid.Row="2" Grid.Column="1" Click="ButtonMod_Click"/>
+		<Button Content="^" Grid.Row="2" Grid.Column="2" Click="ButtonExp_Click"/>
+
+		<!--controls-->
+		<Button Content="=" Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" Click="ButtonEquals_Click"/>
+		<Button Content="←" Grid.Row="1" Grid.Column="0" Click="ButtonDel_Click"/>
+		<Button Content="Clear" Grid.Row="2" Grid.Column="0" Click="ButtonClear_Click"/>
+
+		<!--misc-->
+		<Button Content="(" Grid.Row="1" Grid.Column="1" Click="ButtonLeftParen_Click"/>
+		<Button Content=")" Grid.Row="1" Grid.Column="2" Click="ButtonRightParen_Click"/>
+		<Button Content="." Grid.Row="6" Grid.Column="2" Click="ButtonDot_Click"/>
+	</Grid>
+</Window>
